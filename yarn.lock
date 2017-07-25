@@ -2516,12 +2516,13 @@ table@^3.7.8:
     slice-ansi "0.0.4"
     string-width "^2.0.0"
 
-taki@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.npmjs.org/taki/-/taki-0.2.0.tgz#01e845d01ced1905dbadd6fdf2884aeccde75f47"
+taki@^0.4.2:
+  version "0.4.2"
+  resolved "https://registry.npmjs.org/taki/-/taki-0.4.2.tgz#de538abb6da36ab8c0b1dde899d5c7ddbdcbb2f8"
   dependencies:
     chromy "^0.3.6"
     jsdom "^9"
+    promise.series "^0.2.0"
 
 tar@^3.1.5:
   version "3.1.5"
