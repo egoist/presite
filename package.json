@@ -24,6 +24,7 @@
     "fs-extra": "^4.0.0",
     "get-port": "^3.1.0",
     "loud-rejection": "^1.6.0",
+    "promise.series": "^0.2.0",
     "read-pkg-up": "^2.0.0",
     "taki": "^0.2.0",
     "update-notifier": "^2.2.0",
