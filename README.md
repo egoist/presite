@@ -42,7 +42,8 @@ Then the generated website can be found at `.presite` folder.
 ```
 </details>
 <br>
-By default it only prerender path: `/`, you can configure `routes` option for more, see below:
+
+By default it only prerenders path: `/`, you can configure `routes` option for more, see below:
 
 ## Configure in package.json
 
