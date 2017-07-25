@@ -2,6 +2,12 @@
 
 [![NPM version](https://img.shields.io/npm/v/presite.svg?style=flat)](https://npmjs.com/package/presite) [![NPM downloads](https://img.shields.io/npm/dm/presite.svg?style=flat)](https://npmjs.com/package/presite) [![CircleCI](https://circleci.com/gh/egoist/presite/tree/master.svg?style=shield)](https://circleci.com/gh/egoist/presite/tree/master)  [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&style=flat)](https://github.com/egoist/donate)
 
+## Why (not) prerender?
+
+- It works for every single-page website
+- It requires no modification on your app code
+- It does **not** suite large website that heavily depends on async data, use SSR instead.
+
 ## Install
 
 ```bash
