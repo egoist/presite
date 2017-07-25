@@ -74,12 +74,14 @@ By default it uses JSDOM, but you can use Chrome instead:
 
 ### Wait
 
-Wait specific ms for the app to get ready:
+Wait specific ms or dom element to appear:
 
 ```js
 {
   "presite": {
-    "wait": 3000
+    "wait": 3000,
+    // Or wait for an element
+    "wait": "#comments"
   }
 }
 ```
