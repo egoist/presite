@@ -27,14 +27,7 @@ cli
       const Writer = require('../lib/Writer')
       const Logger = require('../lib/Logger')
 
-      const cliOptions = pick(flags, [
-        'manually',
-        'routes',
-        'wait',
-        'outDir',
-        'verbose',
-        'browser'
-      ])
+      const cliOptions = flags
 
       if (input[0]) {
         cliOptions.baseDir = input[0]
@@ -115,6 +108,9 @@ cli
     desc: 'Manually set ready state in your app',
     alias: 'm'
   })
+  .option('minify', {
+    desc: 'Minify HTML'
+  })
   .option('routes', {
     desc: 'An array of routes to crawl contents from',
     alias: 'r'
@@ -129,12 +125,3 @@ cli
   })
 
 cli.parse()
-
-function pick(obj, keys) {
-  return keys.reduce((res, next) => {
-    if (typeof obj[next] !== 'undefined') {
-      res[next] = obj[next]
-    }
-    return res
-  }, {})
-}
