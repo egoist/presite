@@ -53,17 +53,7 @@ By default it only prerenders path: `/`, you can configure `routes` option for m
 
 ## Configure in package.json
 
-#### Use Chrome headless
-
-By default it uses JSDOM, but you can use Chrome instead:
-
-```js
-{
-  "presite": {
-    "browser": "chrome"
-  }
-}
-```
+Note: You can also configuration it in `presite.json`.
 
 #### Set routes that needs prerender
 
