@@ -28,7 +28,7 @@
     "loud-rejection": "^1.6.0",
     "promise.series": "^0.2.0",
     "read-pkg-up": "^2.0.0",
-    "taki": "^1.0.0",
+    "taki": "^1.0.5",
     "update-notifier": "^2.2.0",
     "use-config": "^2.0.3"
   },
