@@ -94,8 +94,8 @@ cli
           logger.log(`Done, check out ${chalk.green(options.outDir)} folder`)
           process.exit()
         })
-        .catch(err => {
-          console.error(err.stack)
+        .catch(error => {
+          console.error(error.stack)
           server && server.stop()
           process.exit(1)
         })

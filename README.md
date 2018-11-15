@@ -11,7 +11,11 @@
 ## Install
 
 ```bash
-yarn global add presite
+npm i -g presite
+
+# China mirror for downloading chromium
+npm config set puppeteer_download_host=https://storage.googleapis.com.cnpmjs.org
+npm i -g presite
 ```
 
 ## Usage
@@ -24,7 +28,7 @@ Then the generated website can be found at `.presite` folder.
 
 ## Examples
 
-<details><summary>with create-react-app</summary>
+<details><summary>with Create React App</summary>
 
 ```diff
 {
@@ -36,13 +40,25 @@ Then the generated website can be found at `.presite` folder.
 ```
 </details>
 
-<details><summary>with vuejs-templates/webpack</summary>
+<details><summary>with Vue CLI</summary>
 
 ```diff
 {
   "scripts": {
--    "build": "node build/build.js"
-+    "build": "node build/build.js && presite ./dist"
+-    "build": "vue-cli-service build"
++    "build": "vue-cli-service build && presite ./dist"
+  }
+}
+```
+</details>
+
+<details><summary>with Poi</summary>
+
+```diff
+{
+  "scripts": {
+-    "build": "poi build"
++    "build": "poi build && presite ./dist"
   }
 }
 ```
