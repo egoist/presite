@@ -4,7 +4,7 @@ const cac = require('cac')
 const loudRejection = require('loud-rejection')
 const chalk = require('chalk')
 const update = require('update-notifier')
-const UseConfig = require('use-config')
+const JoyCon = require('joycon')
 const pkg = require('../package')
 
 update({ pkg }).notify()
@@ -38,14 +38,14 @@ cli
       let writer
       let logger
 
-      const useConfig = new UseConfig({
-        name: 'presite',
-        files: ['package.json', '{name}.json']
+      const joycon = new JoyCon({
+        packageKey: 'presite',
+        files: ['package.json', 'presite.config.json', 'presite.config.js']
       })
 
-      useConfig
+      joycon
         .load()
-        .then(({ config, path: configPath }) => {
+        .then(({ data: config, path: configPath }) => {
           if (configPath) {
             console.log(
               `Using config from ${chalk.green(
