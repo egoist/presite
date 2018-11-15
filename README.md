@@ -1,6 +1,6 @@
 # presite
 
-[![NPM version](https://img.shields.io/npm/v/presite.svg?style=flat)](https://npmjs.com/package/presite) [![NPM downloads](https://img.shields.io/npm/dm/presite.svg?style=flat)](https://npmjs.com/package/presite) [![CircleCI](https://circleci.com/gh/egoist/presite/tree/master.svg?style=shield)](https://circleci.com/gh/egoist/presite/tree/master)  [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&style=flat)](https://github.com/egoist/donate)
+[![NPM version](https://img.shields.io/npm/v/presite.svg?style=flat)](https://npmjs.com/package/presite) [![NPM downloads](https://img.shields.io/npm/dm/presite.svg?style=flat)](https://npmjs.com/package/presite) [![CircleCI](https://circleci.com/gh/egoist/presite/tree/master.svg?style=shield)](https://circleci.com/gh/egoist/presite/tree/master) [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&style=flat)](https://github.com/egoist/donate)
 
 ## Why (not) prerender?
 
@@ -38,6 +38,7 @@ Then the generated website can be found at `.presite` folder.
   }
 }
 ```
+
 </details>
 
 <details><summary>with Vue CLI</summary>
@@ -50,6 +51,7 @@ Then the generated website can be found at `.presite` folder.
   }
 }
 ```
+
 </details>
 
 <details><summary>with Poi</summary>
@@ -62,24 +64,31 @@ Then the generated website can be found at `.presite` folder.
   }
 }
 ```
+
 </details>
 <br>
 
 By default it only prerenders path: `/`, you can configure `routes` option for more, see below:
 
-## Configure in package.json
+## Configure in presite.config.js
 
-Note: You can also configuration it in `presite.json`.
+Note: You can also configuration it in `presite.config.json` or the `presite` key in `package.json`.
 
 #### Set routes that needs prerender
 
 ```js
-{
-  "presite": {
-    "routes": [
-      "/",
-      "/about"
-    ]
+module.exports = {
+  routes: ['/', '/about']
+}
+```
+
+If you want to fetch routes asynchronously, use `async/await`:
+
+```js
+module.exports = {
+  async routes() {
+    const routes = await fetchRoutesFromSomeWhere()
+    return routes
   }
 }
 ```
@@ -89,12 +98,10 @@ Note: You can also configuration it in `presite.json`.
 Wait specific ms or dom element to appear:
 
 ```js
-{
-  "presite": {
-    "wait": 3000,
-    // Or wait for an element
-    "wait": "#comments"
-  }
+module.exports = {
+  wait: 3000
+  // Or wait for an element to appear
+  // wait: '#comments'
 }
 ```
 
@@ -103,10 +110,8 @@ Wait specific ms or dom element to appear:
 Instead of using `wait` you can manually tell when the app is ready:
 
 ```js
-{
-  "presite": {
-    "manually": true
-  }
+module.exports = {
+  manually: true
 }
 ```
 
@@ -119,10 +124,8 @@ window.snapshot && window.snapshot()
 ### Source directory
 
 ```js
-{
-  "presite": {
-    "baseDir": "./path/to/your/spa"
-  }
+module.exports = {
+  baseDir: './path/to/your/spa'
 }
 ```
 
@@ -131,10 +134,8 @@ window.snapshot && window.snapshot()
 By default it outputs to `.presite` folder in current directory.
 
 ```js
-{
-  "presite": {
-    "outDir": ".presite"
-  }
+module.exports = {
+  outDir: '.presite'
 }
 ```
 
@@ -150,10 +151,9 @@ Run `presite --help`.
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request :D
 
-
 ## Author
 
 **presite** © [egoist](https://github.com/egoist), Released under the [MIT](./LICENSE) License.<br>
 Authored and maintained by egoist with help from contributors ([list](https://github.com/egoist/presite/contributors)).
 
-> [egoist.moe](https://egoist.moe) · GitHub [@egoist](https://github.com/egoist) · Twitter [@_egoistlily](https://twitter.com/_egoistlily)
+> [Website](https://egoist.sh) · GitHub [@egoist](https://github.com/egoist) · Twitter [@\_egoistlily](https://twitter.com/_egoistlily)
