@@ -27,7 +27,7 @@
     "joycon": "^2.1.2",
     "loud-rejection": "^2.2.0",
     "promise.series": "^0.2.0",
-    "read-pkg-up": "^2.0.0",
+    "read-pkg-up": "^7.0.0",
     "taki": "^1.3.0",
     "update-notifier": "^2.2.0"
   },
