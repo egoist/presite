@@ -6,7 +6,7 @@
 
 - It works for every single-page website
 - It requires no modification on your app code
-- It does **not** suite large website that heavily depends on async data, use SSR instead.
+- But it does **not** suit a large website which depends heavily on async data - SSR would be preferred for that.
 
 ## Install
 
