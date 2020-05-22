@@ -90,13 +90,13 @@ Or configure that as in the [Output directory](#output-directory) section.
 
 ## Configure
 
-### Config file
+### Choose a config file approach
 
 Presite will work without a config file.
 
 But you can optionally create a config file to override settings - use one of the follow approaches:
 
-#### JavaScript config
+#### Create JavaScript config
 
 Add `presite.config.js` to your project's root.
 
@@ -108,7 +108,7 @@ module.exports = {
 }
 ```
 
-#### JSON config
+#### Create JSON config
 
 Add `presite.config.json` to your project's root.
 
@@ -120,7 +120,7 @@ For example:
 }
 ```
 
-#### Package config
+#### Use the package config
 
 Add the `presite` field to your `package.json`.
 
