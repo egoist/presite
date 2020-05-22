@@ -28,19 +28,21 @@ presite --help
 
 ## Usage
 
-Run against your single-page application's build directory, which might be `dist` or `build` for example`.
+Run against your single-page application's build directory. Use `dist` or `build` for example as the target.
 
 ```bash
 presite BUILD_DIR
 ```
 
-By default, presite will only look at the project's root. To set custom roots, see [Set routes that needs prerender](#set-routes-that-needs-prerender).
+By default, presite will only look at the project's root path. To set custom routes, see [Set routes that needs prerender](#set-routes-that-needs-prerender).
 
-Presite will create a `.presite` directory and write output to it. You can override this using a flag as below. Or see [Output directory](#output-directory) section.
+Presite will create a `.presite` directory and write output to it. You can override this using a flag as below.
 
 ```bash
-presite ./dist -o ./static-html
+presite dist -o static-html
 ```
+
+Or configure that as in the [Output directory](#output-directory) section.
 
 ## Examples
 
@@ -84,43 +86,58 @@ presite ./dist -o ./static-html
 </details>
 <br>
 
-
 ## Configure
 
+### Config file
 
-### Config files
+Presite will work without a config file.
 
-Presite will work without a config file. You can _optionally_ create a config file to override settings.
+But you can optionally create a config file to override settings - use one of the follow approaches:
 
-Use one of the follow approaches:
+#### JavaScript config
 
-- `presite.config.js` in your project's root. Example content:
-    ```javascript
-    module.exports = {
-      routes: ['/']
-    }
-    ```
-- `presite.config.json` in your project's root. Example content:
-    ```json
-    {
-      "routes": ["/"]
-    }
-    ```
-- Add a `presite` field to your `package.json`. For example:
-    ```json
-    {
-      "name": "my-app",
-      "presite": {
-        "routes": [
-          "/"
-        ]
-      }
-    }
-    ```
+Add `presite.config.js` to your project's root.
+
+For example:
+
+```javascript
+module.exports = {
+  routes: ['/']
+}
+```
+
+#### JSON config
+
+Add `presite.config.json` to your project's root.
+
+For example:
+
+```json
+{
+  "routes": ["/"]
+}
+```
+
+#### Package config
+
+Add the `presite` field to your `package.json`.
+
+For example:
+
+```json
+{
+  "name": "my-app",
+  "presite": {
+    "routes": [
+      "/"
+    ]
+  }
+}
+```
 
 #### Set routes that needs prerender
 
-While presite will render the route by default, you can specify an array of routes.
+While presite will render the _root path_ (`'/'`) by default, but you can override with an array of routes.
 
 For example:
 
@@ -143,7 +160,7 @@ module.exports = {
 
 ### Wait
 
-Wait for duration in milliseconds:
+Set a wait duration in milliseconds:
 
 ```js
 module.exports = {
@@ -185,7 +202,7 @@ module.exports = {
 
 ### Output directory
 
-By default it outputs to `.presite` folder in the current directory.
+By default, presite outputs to a `.presite` folder in the current directory.
 
 ```js
 module.exports = {
