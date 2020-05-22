@@ -139,7 +139,7 @@ For example:
 
 #### Set routes that needs prerender
 
-While presite will render the _root path_ (`'/'`) by default, but you can override with an array of routes.
+Presite will render the **root path** (`'/'`) by default. You can override this by providing an array of paths for the `routes` field.
 
 For example:
 
