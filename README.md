@@ -18,13 +18,29 @@ npm config set puppeteer_download_host=https://storage.googleapis.com.cnpmjs.org
 npm i -g presite
 ```
 
-## Usage
+## CLI options
+
+Run the help command.
 
 ```bash
-presite ./path/to/your/spa
+presite --help
 ```
 
-Then the generated website can be found at `.presite` folder.
+## Usage
+
+Run against your single-page application's build directory, which might be `dist` or `build` for example`.
+
+```bash
+presite BUILD_DIR
+```
+
+By default, presite will only look at the project's root. To set custom roots, see [Set routes that needs prerender](#set-routes-that-needs-prerender).
+
+Presite will create a `.presite` directory and write output to it. You can override this using a flag as below. Or see [Output directory](#output-directory) section.
+
+```bash
+presite ./dist -o ./static-html
+```
 
 ## Examples
 
@@ -68,13 +84,45 @@ Then the generated website can be found at `.presite` folder.
 </details>
 <br>
 
-By default it only prerenders path: `/`, you can configure `routes` option for more, see below:
 
-## Configure in presite.config.js
+## Configure
 
-Note: You can also configuration it in `presite.config.json` or the `presite` key in `package.json`.
+
+### Config files
+
+Presite will work without a config file. You can _optionally_ create a config file to override settings.
+
+Use one of the follow approaches:
+
+- `presite.config.js` in your project's root. Example content:
+    ```javascript
+    module.exports = {
+      routes: ['/']
+    }
+    ```
+- `presite.config.json` in your project's root. Example content:
+    ```json
+    {
+      "routes": ["/"]
+    }
+    ```
+- Add a `presite` field to your `package.json`. For example:
+    ```json
+    {
+      "name": "my-app",
+      "presite": {
+        "routes": [
+          "/"
+        ]
+      }
+    }
+    ```
 
 #### Set routes that needs prerender
+
+While presite will render the route by default, you can specify an array of routes.
+
+For example:
 
 ```js
 module.exports = {
@@ -95,17 +143,23 @@ module.exports = {
 
 ### Wait
 
-Wait specific ms or dom element to appear:
+Wait for duration in milliseconds:
 
 ```js
 module.exports = {
   wait: 3000
-  // Or wait for an element to appear
-  // wait: '#comments'
 }
 ```
 
-### Maunally set ready state
+Or wait for an element to appear in the DOM:
+
+```js
+module.exports = {
+  wait: '#comments'
+}
+```
+
+### Manually set ready state
 
 Instead of using `wait` you can manually tell when the app is ready:
 
@@ -131,17 +185,13 @@ module.exports = {
 
 ### Output directory
 
-By default it outputs to `.presite` folder in current directory.
+By default it outputs to `.presite` folder in the current directory.
 
 ```js
 module.exports = {
   outDir: '.presite'
 }
 ```
-
-## CLI options
-
-Run `presite --help`.
 
 ## Contributing
 
