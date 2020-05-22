@@ -18,7 +18,9 @@ npm config set puppeteer_download_host=https://storage.googleapis.com.cnpmjs.org
 npm i -g presite
 ```
 
-## CLI options
+## Usage
+
+### CLI options
 
 Run the help command.
 
@@ -26,7 +28,7 @@ Run the help command.
 presite --help
 ```
 
-## Usage
+### Prerender a target directory
 
 Run against your single-page application's build directory. Use `dist` or `build` for example as the target.
 
