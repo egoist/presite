@@ -22,7 +22,13 @@ npm i -g presite
 
 ### CLI options
 
-Run the help command.
+```bash
+presite <command> [options]
+```
+
+Options can be configured using flags as shown by the CLI help, or using a [config](#configure) file.
+
+### Display help
 
 ```bash
 presite --help
@@ -30,21 +36,29 @@ presite --help
 
 ### Prerender a target directory
 
-Run against your single-page application's build directory. Use `dist` or `build` for example as the target.
+The basic use is to prerender against your single-page application's build directory. 
 
 ```bash
 presite BUILD_DIR
 ```
 
-By default, presite will only look at the project's root path. To set custom routes, see [Set routes that needs prerender](#set-routes-that-needs-prerender).
+Use `dist` or `build` for example as the target.
 
-Presite will create a `.presite` directory and write output to it. You can override this using a flag as below.
+Note that your application does not need be running.
+
+By default, presite will only look at the app's root path. To set custom routes, see [Set routes that needs prerender](#set-routes-that-needs-prerender).
+
+### Set custom output directory
+
+Presite will create a `.presite` directory in your project root and write files to it. 
+
+You can override this as in the example below:
 
 ```bash
 presite dist -o static-html
 ```
 
-Or configure that as in the [Output directory](#output-directory) section.
+Or configure it once - see the [Output directory](#output-directory) section.
 
 ## Examples
 
@@ -98,7 +112,7 @@ But you can optionally create a config file to override settings - use one of th
 
 #### Create JavaScript config
 
-Add `presite.config.js` to your project's root.
+Add `presite.config.js` to your project's root and add presite fields.
 
 For example:
 
@@ -110,7 +124,7 @@ module.exports = {
 
 #### Create JSON config
 
-Add `presite.config.json` to your project's root.
+Add `presite.config.json` to your project's root and add presite fields.
 
 For example:
 
@@ -122,7 +136,7 @@ For example:
 
 #### Use the package config
 
-Add the `presite` field to your `package.json`.
+Update your `package.json` to include a `presite` key and presite fields.
 
 For example:
 
