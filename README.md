@@ -20,11 +20,45 @@ npm i -g presite
 
 ## Usage
 
+### CLI options
+
 ```bash
-presite ./path/to/your/spa
+presite <command> [options]
 ```
 
-Then the generated website can be found at `.presite` folder.
+Options can be configured using flags as shown by the CLI help, or using a [config](#configure) file.
+
+### Display help
+
+```bash
+presite --help
+```
+
+### Prerender a target directory
+
+The basic use is to prerender against your single-page application's build directory. 
+
+```bash
+presite BUILD_DIR
+```
+
+Use `dist` or `build` for example as the target.
+
+Note that your application does not need be running.
+
+By default, presite will only look at the app's root path. To set custom routes, see [Set routes that needs prerender](#set-routes-that-needs-prerender).
+
+### Set custom output directory
+
+Presite will create a `.presite` directory in your project root and write files to it. 
+
+You can override this as in the example below:
+
+```bash
+presite dist -o static-html
+```
+
+Or configure it once - see the [Output directory](#output-directory) section.
 
 ## Examples
 
@@ -68,13 +102,60 @@ Then the generated website can be found at `.presite` folder.
 </details>
 <br>
 
-By default it only prerenders path: `/`, you can configure `routes` option for more, see below:
+## Configure
 
-## Configure in presite.config.js
+### Choose a config file approach
 
-Note: You can also configuration it in `presite.config.json` or the `presite` key in `package.json`.
+Presite will work without a config file.
+
+But you can optionally create a config file to override settings - use one of the follow approaches:
+
+#### Create JavaScript config
+
+Add `presite.config.js` to your project's root and add presite fields.
+
+For example:
+
+```javascript
+module.exports = {
+  routes: ['/']
+}
+```
+
+#### Create JSON config
+
+Add `presite.config.json` to your project's root and add presite fields.
+
+For example:
+
+```json
+{
+  "routes": ["/"]
+}
+```
+
+#### Use the package config
+
+Update your `package.json` to include a `presite` key and presite fields.
+
+For example:
+
+```json
+{
+  "name": "my-app",
+  "presite": {
+    "routes": [
+      "/"
+    ]
+  }
+}
+```
 
 #### Set routes that needs prerender
+
+Presite will render the **root path** (`'/'`) by default. You can override this by providing an array of paths for the `routes` field.
+
+For example:
 
 ```js
 module.exports = {
@@ -95,17 +176,23 @@ module.exports = {
 
 ### Wait
 
-Wait specific ms or dom element to appear:
+Set a wait duration in milliseconds:
 
 ```js
 module.exports = {
   wait: 3000
-  // Or wait for an element to appear
-  // wait: '#comments'
 }
 ```
 
-### Maunally set ready state
+Or wait for an element to appear in the DOM:
+
+```js
+module.exports = {
+  wait: '#comments'
+}
+```
+
+### Manually set ready state
 
 Instead of using `wait` you can manually tell when the app is ready:
 
@@ -131,17 +218,13 @@ module.exports = {
 
 ### Output directory
 
-By default it outputs to `.presite` folder in current directory.
+By default, presite outputs to a `.presite` folder in the current directory.
 
 ```js
 module.exports = {
   outDir: '.presite'
 }
 ```
-
-## CLI options
-
-Run `presite --help`.
 
 ## Contributing
 
