@@ -75,9 +75,8 @@ Then the generated website can be found at `.presite` folder.
 ```
 
 </details>
-<br>
 
-That's it, Presite prerender all pages of your website without any configuration!
+**That's it, Presite prerender all pages of your website without any configuration!**
 
 Run `presite --help` for all CLI flags.
 
