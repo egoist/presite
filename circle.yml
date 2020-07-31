@@ -11,14 +11,14 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
+          key: dependency-cache-{{ checksum "yarn.lock" }}
       - run:
           name: install dependences
-          command: npm i
+          command: yarn
       - save_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
+          key: dependency-cache-{{ checksum "yarn.lock" }}
           paths:
             - ./node_modules
       - run:
           name: test
-          command: npm test
+          command: yarn test

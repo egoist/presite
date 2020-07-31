@@ -2,11 +2,9 @@
 
 [![NPM version](https://img.shields.io/npm/v/presite.svg?style=flat)](https://npmjs.com/package/presite) [![NPM downloads](https://img.shields.io/npm/dm/presite.svg?style=flat)](https://npmjs.com/package/presite) [![CircleCI](https://circleci.com/gh/egoist/presite/tree/master.svg?style=shield)](https://circleci.com/gh/egoist/presite/tree/master) [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&style=flat)](https://github.com/egoist/donate)
 
-## Why (not) prerender?
+## Why Presite?
 
-- It works for every single-page website
-- It requires no modification on your app code
-- But it does **not** suit a large website which depends heavily on async data - SSR would be preferred for that.
+Presite is an alternative to static site generators like Gatsby, Next.js and Nuxt.js etc, the difference is that it uses [Puppeteer](https://pptr.dev) to prerender websites instead of relying on server-side rendering.
 
 ## Install
 
@@ -68,13 +66,21 @@ Then the generated website can be found at `.presite` folder.
 </details>
 <br>
 
-By default it only prerenders path: `/`, you can configure `routes` option for more, see below:
+That's it, Presite prerender all pages of your website without any configuration!
+
+Run `presite --help` for all CLI flags.
 
 ## Configure in presite.config.js
+
+Many CLI flags can be stored in a configuration file, that's totaly optional but if you need one, read on.
 
 Note: You can also configuration it in `presite.config.json` or the `presite` key in `package.json`.
 
 #### Set routes that needs prerender
+
+**Note that in most cases you won't need this option, Presite automatically find all same-site `<a>` elements on the pages and prerender all of them.**
+
+If some of your pages are not referenced by other pages, you can manually specify them here:
 
 ```js
 module.exports = {
@@ -121,7 +127,19 @@ Then you can call `window.snapshot` in your app when its contents are ready:
 window.snapshot && window.snapshot()
 ```
 
+To use a custom global variable name, set it to a string instead:
+
+```js
+module.exports = {
+  manually: `__my_snapshot__`
+}
+```
+
+Now you should call `window.__my_snapshot__()` instead.
+
 ### Source directory
+
+This is the same as using CLI `presite ./path/to/your/spa`:
 
 ```js
 module.exports = {

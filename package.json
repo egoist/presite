@@ -6,47 +6,43 @@
     "url": "egoist/presite",
     "type": "git"
   },
-  "bin": "bin/cli.js",
+  "bin": "dist/cli.js",
   "files": [
-    "bin",
-    "lib"
+    "dist"
   ],
   "scripts": {
-    "test": "echo 'no tests!' && npm run lint",
-    "lint": "xo"
+    "test": "echo 'no tests!'",
+    "build": "tsup src/cli.ts --dts",
+    "prepublishOnly": "npm run build",
+    "presite": "node -r sucrase/register src/cli.ts",
+    "release": "shipjs prepare"
   },
   "author": "egoist <0x142857@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "cac": "^4.3.4",
+    "@egoist/promise-queue": "^1.1.0",
+    "cac": "^6.6.1",
     "chalk": "^2.0.1",
     "connect-history-api-fallback": "^1.3.0",
-    "express": "^4.15.3",
     "fs-extra": "^8.0.1",
     "get-port": "^5.0.0",
     "joycon": "^2.1.2",
-    "loud-rejection": "^2.2.0",
-    "promise.series": "^0.2.0",
+    "polka": "^0.5.2",
     "read-pkg-up": "^2.0.0",
-    "taki": "^1.3.0",
-    "update-notifier": "^2.2.0"
+    "serve-static": "^1.14.1",
+    "taki": "2.0.0",
+    "update-notifier": "^4.1.0"
   },
   "devDependencies": {
-    "eslint-config-rem": "^4.0.0",
-    "xo": "^0.23.0"
+    "@types/connect-history-api-fallback": "^1.3.3",
+    "@types/fs-extra": "^9.0.1",
+    "@types/polka": "^0.5.1",
+    "@types/update-notifier": "^4.1.0",
+    "shipjs": "0.20.1",
+    "tsup": "^3.4.2",
+    "typescript": "^3.9.7"
   },
-  "xo": {
-    "extends": "rem",
-    "rules": {
-      "unicorn/filename-case": 0
-    },
-    "ignores": [
-      "example/**"
-    ]
-  },
-  "presite": {
-    "routes": [
-      "/"
-    ]
+  "engines": {
+    "node": ">=12"
   }
 }
