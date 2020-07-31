@@ -80,6 +80,23 @@ Then the generated website can be found at `.presite` folder.
 
 Run `presite --help` for all CLI flags.
 
+## Non-HTML pages
+
+Presite also supports rendering non-HTML pages like XML or JSON pages, simply create files ending with `.xml.js` or `.json.js`, let's say you have a `feed.json.js`:
+
+```js
+import { createJSONFeed } from './somewhere/create-json-feed'
+
+export default async () => {
+  const posts = await fetch('/api/my-posts').then((res) => res.json())
+  return createJSONFeed(posts)
+}
+```
+
+You can export a function that resolves to a string or JSON object, then Presite will output this page as `feed.json`.
+
+These pages are evaluated in browser in a `<script type="module">` tag, so you can use the `import` keyword.
+
 ## Configure in presite.config.js
 
 Many CLI flags can be stored in a configuration file, that's totaly optional but if you need one, read on.

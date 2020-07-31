@@ -42,7 +42,7 @@ async function main() {
 
       const joycon = new JoyCon({
         packageKey: 'presite',
-        files: ['package.json', 'presite.config.json', 'presite.config.js']
+        files: ['package.json', 'presite.config.json', 'presite.config.js'],
       })
 
       const { data: configData, path: configPath } = await joycon.load()
@@ -57,35 +57,37 @@ async function main() {
       config = Object.assign(
         {
           outDir: '.presite',
-          routes: ['/']
+          routes: ['/'],
         },
         configData,
         flags,
         {
-          baseDir: dir
+          baseDir: dir,
         }
       )
 
       const logger = new Logger({ verbose: !flags.quiet })
 
       const server = new Server({
-        baseDir: config.baseDir
+        baseDir: config.baseDir,
+        outDir: config.outDir,
       })
 
       const writer = new Writer({
-        outDir: config.outDir
+        outDir: config.outDir,
       })
 
+      logger.log(`Copy static assets`)
       await Promise.all([server.start(), writer.copyFrom(config.baseDir)])
 
       const crawler = new Crawler({
         hostname: server.hostname,
         port: server.port!,
         options: {
-          routes: config.routes
+          routes: config.routes,
         },
         writer,
-        logger
+        logger,
       })
 
       await crawler.crawl()
@@ -101,7 +103,7 @@ async function main() {
   await cli.runMatchedCommand()
 }
 
-main().catch(error => {
+main().catch((error) => {
   console.error(error)
   process.exit(1)
 })

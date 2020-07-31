@@ -5,7 +5,12 @@ import { PromiseQueue } from '@egoist/promise-queue'
 import { Writer } from './Writer'
 import { Logger } from './Logger'
 
+export const SPECIAL_EXTENSIONS_RE = /\.(xml|json)$/
+
 const routeToFile = (route: string) => {
+  if (/\.html$/.test(route) || SPECIAL_EXTENSIONS_RE.test(route)) {
+    return route
+  }
   return route.replace(/\/?$/, '/index.html')
 }
 
@@ -43,11 +48,23 @@ export class Crawler {
       const queue = new PromiseQueue(
         async (route: string) => {
           const file = routeToFile(route)
-
           const html = await request({
             url: `http://${hostname}:${port}${route}`,
-            onAfterRequest: (url) => {
+            onBeforeRequest(url) {
               logger.log(`Crawling contents from ${chalk.cyan(url)}`)
+            },
+            manually: SPECIAL_EXTENSIONS_RE.test(route) ? true : undefined,
+            onCreatedPage(page) {
+              page.on('console', (e) => {
+                const type = e.type()
+                // @ts-ignore
+                const log = console[type] || console.log
+                const location = e.location()
+                log(
+                  `Message from ${location.url}:${location.lineNumber}:${location.columnNumber}`,
+                  e.text()
+                )
+              })
             },
           })
 
@@ -64,8 +81,8 @@ export class Crawler {
             }
           }
 
-          await writer.write({ html, file })
           logger.log(`Writing ${chalk.cyan(file)} for ${chalk.cyan(route)}`)
+          await writer.write({ html, file })
         },
         { maxConcurrent: 50 }
       )
