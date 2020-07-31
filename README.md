@@ -10,11 +10,9 @@ Presite is an alternative to static site generators like Gatsby, Next.js and Nux
 
 ```bash
 npm i -g presite
-
-# China mirror for downloading chromium
-npm config set puppeteer_download_host=https://storage.googleapis.com.cnpmjs.org
-npm i -g presite
 ```
+
+**Note that Presite relies on Chrome (or Chromium) browser on your machine, so you need to ensure it's installed before running Presite**.
 
 ## Usage
 
@@ -84,7 +82,7 @@ If some of your pages are not referenced by other pages, you can manually specif
 
 ```js
 module.exports = {
-  routes: ['/', '/about']
+  routes: ['/', '/about'],
 }
 ```
 
@@ -95,7 +93,7 @@ module.exports = {
   async routes() {
     const routes = await fetchRoutesFromSomeWhere()
     return routes
-  }
+  },
 }
 ```
 
@@ -105,7 +103,7 @@ Wait specific ms or dom element to appear:
 
 ```js
 module.exports = {
-  wait: 3000
+  wait: 3000,
   // Or wait for an element to appear
   // wait: '#comments'
 }
@@ -117,7 +115,7 @@ Instead of using `wait` you can manually tell when the app is ready:
 
 ```js
 module.exports = {
-  manually: true
+  manually: true,
 }
 ```
 
@@ -131,7 +129,7 @@ To use a custom global variable name, set it to a string instead:
 
 ```js
 module.exports = {
-  manually: `__my_snapshot__`
+  manually: `__my_snapshot__`,
 }
 ```
 
@@ -143,7 +141,7 @@ This is the same as using CLI `presite ./path/to/your/spa`:
 
 ```js
 module.exports = {
-  baseDir: './path/to/your/spa'
+  baseDir: './path/to/your/spa',
 }
 ```
 
@@ -153,7 +151,7 @@ By default it outputs to `.presite` folder in current directory.
 
 ```js
 module.exports = {
-  outDir: '.presite'
+  outDir: '.presite',
 }
 ```
 
