@@ -4,6 +4,7 @@ import { cac } from 'cac'
 import chalk from 'chalk'
 import update from 'update-notifier'
 import JoyCon from 'joycon'
+import { Page } from 'puppeteer-core'
 
 const pkg: typeof import('../package.json') = require('../package')
 
@@ -36,6 +37,7 @@ async function main() {
         baseDir?: string
         outDir?: string
         routes?: string[] | (() => Promise<string[]>)
+        onBrowserPage?: (page: Page) => void | Promise<void>
       }
 
       let config: Required<ConfigInput>
@@ -85,6 +87,7 @@ async function main() {
         port: server.port!,
         options: {
           routes: config.routes,
+          onBrowserPage: config.onBrowserPage,
         },
         writer,
         logger,

@@ -164,6 +164,18 @@ module.exports = {
 
 Now you should call `window.__my_snapshot__()` instead.
 
+### Access Puppeteer browser page
+
+Access the [`page`](https://pptr.dev/#?product=Puppeteer&version=v5.2.1&show=api-class-page) instance, for example, to expose some functions from Node.js to browser:
+
+```js
+module.exports = {
+  async onBrowserPage(page) {
+    await page.exposeFunction('md5', (content) => md5(content))
+  },
+}
+```
+
 ### Source directory
 
 This is the same as using CLI `presite ./path/to/your/spa`:

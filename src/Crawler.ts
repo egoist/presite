@@ -4,6 +4,7 @@ import chalk from 'chalk'
 import { PromiseQueue } from '@egoist/promise-queue'
 import { Writer } from './Writer'
 import { Logger } from './Logger'
+import { Page } from 'puppeteer-core'
 
 export const SPECIAL_EXTENSIONS_RE = /\.(xml|json)$/
 
@@ -14,16 +15,12 @@ const routeToFile = (route: string) => {
   return route.replace(/\/?$/, '/index.html')
 }
 
-const getHref = (attrs: string) => {
-  const match = /href\s*=\s*(?:"(.*?)"|'(.*?)'|([^\s>]*))/.exec(attrs)
-  return match && (match[1] || match[2] || match[3])
-}
-
 type CrawlerOptions = {
   hostname: string
   port: number
   options: {
     routes: string[] | (() => Promise<string[]>)
+    onBrowserPage?: (page: Page) => void | Promise<void>
   }
   writer: Writer
   logger: Logger
@@ -48,13 +45,31 @@ export class Crawler {
       const queue = new PromiseQueue(
         async (route: string) => {
           const file = routeToFile(route)
+          let links: Set<string> | undefined
           const html = await request({
             url: `http://${hostname}:${port}${route}`,
             onBeforeRequest(url) {
               logger.log(`Crawling contents from ${chalk.cyan(url)}`)
             },
+            async onBeforeClosingPage(page) {
+              links = new Set(
+                await page.evaluate(
+                  ({ hostname, port }: { hostname: string; port: string }) => {
+                    return Array.from(document.querySelectorAll('a'))
+                      .filter((a) => {
+                        return a.hostname === hostname && a.port === port
+                      })
+                      .map((a) => a.pathname)
+                  },
+                  { hostname, port: String(port) }
+                )
+              )
+            },
             manually: SPECIAL_EXTENSIONS_RE.test(route) ? true : undefined,
-            onCreatedPage(page) {
+            async onCreatedPage(page) {
+              if (options.onBrowserPage) {
+                await options.onBrowserPage(page)
+              }
               page.on('console', (e) => {
                 const type = e.type()
                 // @ts-ignore
@@ -68,16 +83,9 @@ export class Crawler {
             },
           })
 
-          // find all `<a>` tags in exported html files and export links that are not yet exported
-          let match: RegExpExecArray | null = null
-          const LINK_RE = /<a ([\s\S]+?)>/gm
-          while ((match = LINK_RE.exec(html))) {
-            const href = getHref(match[1])
-            if (href) {
-              const parsed = parseUrl(href)
-              if (!parsed.host && parsed.pathname) {
-                queue.add(parsed.pathname)
-              }
+          if (links && links.size > 0) {
+            for (const link of links) {
+              queue.add(link)
             }
           }
 

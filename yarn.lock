@@ -3155,10 +3155,10 @@ supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
-taki@2.2.2:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/taki/-/taki-2.2.2.tgz#79f44c1a04efbd171e7881caa980f667a5486abe"
-  integrity sha512-lKaHTw5RLFWbB4rs7vVo9O5UsC9/DIl51ijYKzgXQ44nHqgDxqPMHdCb2GnIthfC99lzvNdFup+qxjISKXV5tA==
+taki@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/taki/-/taki-2.3.0.tgz#c5ad67af7e04eaaee8c11ba8736e51aed84fc2f5"
+  integrity sha512-CP4lDcqHWj2s03HrJUGF2jn+k/ABm4JUu2IZ8zLGyqPO/nhjxQVHBx11UaaNqg2gIoBIUSvEk5KgFE/AnCOAeQ==
   dependencies:
     debug "4.1.1"
     html-minifier "4.0.0"
