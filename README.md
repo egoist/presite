@@ -99,15 +99,13 @@ You can export a function that resolves to a string or JSON object, then Presite
 
 These pages are evaluated in browser in a `<script type="module">` tag, so you can use the `import` keyword.
 
-## Configure in presite.config.js
+## Using `presite.config.js`
 
-Many CLI flags can be stored in a configuration file, that's totaly optional but if you need one, read on.
+Many CLI flags can be stored in a configuration file, it's totaly optional but if you need one, it's there for you.
 
-Note: You can also configuration it in `presite.config.json` or the `presite` key in `package.json`.
+Besides `presite.config.js`, you can also use `presite.config.json` or the `presite` key in `package.json`.
 
 ### Set routes that needs prerender
-
-**Note that in most cases you won't need this option, Presite automatically find all same-site `<a>` elements on the pages and prerender all of them.**
 
 If some of your pages are not referenced by other pages, you can manually specify them here:
 
@@ -116,6 +114,8 @@ module.exports = {
   routes: ['/', '/about'],
 }
 ```
+
+**Note that in most cases you won't need this option, Presite automatically find all same-site `<a>` elements on the pages and prerender all of them.**
 
 If you want to fetch routes asynchronously, use `async/await`:
 
