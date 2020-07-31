@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "test": "echo 'no tests!'",
-    "build": "tsup src/cli.ts --dts",
+    "build": "rm -rf dist && tsup src/cli.ts --dts",
     "prepublishOnly": "npm run build",
     "presite": "node -r sucrase/register src/cli.ts",
     "release": "shipjs prepare"
