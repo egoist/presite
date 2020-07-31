@@ -62,6 +62,19 @@ Then the generated website can be found at `.presite` folder.
 ```
 
 </details>
+
+<details><summary>with Vite</summary>
+
+```diff
+{
+  "scripts": {
+-    "build": "vite build"
++    "build": "vite build && presite ./dist"
+  }
+}
+```
+
+</details>
 <br>
 
 That's it, Presite prerender all pages of your website without any configuration!
