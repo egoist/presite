@@ -22,7 +22,7 @@
   "dependencies": {
     "@egoist/promise-queue": "^1.1.0",
     "cac": "^6.6.1",
-    "chalk": "^2.0.1",
+    "chalk": "^4.1.0",
     "connect-history-api-fallback": "^1.3.0",
     "fs-extra": "^9.0.1",
     "get-port": "^5.0.0",
