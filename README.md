@@ -105,7 +105,7 @@ Many CLI flags can be stored in a configuration file, that's totaly optional but
 
 Note: You can also configuration it in `presite.config.json` or the `presite` key in `package.json`.
 
-#### Set routes that needs prerender
+### Set routes that needs prerender
 
 **Note that in most cases you won't need this option, Presite automatically find all same-site `<a>` elements on the pages and prerender all of them.**
 
