@@ -17,10 +17,12 @@ npm i -g presite
 ## Usage
 
 ```bash
-presite ./path/to/your/spa
+presite ./path/to/your/site
 ```
 
-Then the generated website can be found at `.presite` folder.
+Presite is supposed to work with existing single-page applications, first you use something like Create React App, Vue CLI, Parcel or Vite to create a production build of your app, then use Presite to pre-render the website to static HTML files.
+
+Pre-rendered website will be generated into `.presite` folder.
 
 ## Examples
 
