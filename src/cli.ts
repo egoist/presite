@@ -38,6 +38,7 @@ async function main() {
         outDir?: string
         routes?: string[] | (() => Promise<string[]>)
         onBrowserPage?: (page: Page) => void | Promise<void>
+        manually?: boolean | string
       }
 
       let config: Required<ConfigInput>
@@ -88,6 +89,7 @@ async function main() {
         options: {
           routes: config.routes,
           onBrowserPage: config.onBrowserPage,
+          manually: config.manually,
         },
         writer,
         logger,

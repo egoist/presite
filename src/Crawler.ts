@@ -21,6 +21,7 @@ type CrawlerOptions = {
   options: {
     routes: string[] | (() => Promise<string[]>)
     onBrowserPage?: (page: Page) => void | Promise<void>
+    manually?: string | boolean
   }
   writer: Writer
   logger: Logger
@@ -65,7 +66,9 @@ export class Crawler {
                 )
               )
             },
-            manually: SPECIAL_EXTENSIONS_RE.test(route) ? true : undefined,
+            manually: SPECIAL_EXTENSIONS_RE.test(route)
+              ? true
+              : options.manually,
             async onCreatedPage(page) {
               if (options.onBrowserPage) {
                 await options.onBrowserPage(page)
