@@ -1,6 +1,6 @@
 {
   "name": "presite",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "CLI app for pre-rendering SPA websites.",
   "repository": {
     "url": "egoist/presite",
