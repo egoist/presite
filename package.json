@@ -39,7 +39,7 @@
     "@types/polka": "^0.5.1",
     "@types/puppeteer-core": "^2.0.0",
     "@types/update-notifier": "^4.1.0",
-    "shipjs": "0.20.1",
+    "shipjs": "0.22.0",
     "tsup": "^3.4.2",
     "typescript": "^3.9.7"
   },
