@@ -3129,10 +3129,10 @@ supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
-taki@2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/taki/-/taki-2.3.0.tgz#c5ad67af7e04eaaee8c11ba8736e51aed84fc2f5"
-  integrity sha512-CP4lDcqHWj2s03HrJUGF2jn+k/ABm4JUu2IZ8zLGyqPO/nhjxQVHBx11UaaNqg2gIoBIUSvEk5KgFE/AnCOAeQ==
+taki@2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/taki/-/taki-2.3.1.tgz#694f13f791dda96c236a07fd0895c6e4528df3cf"
+  integrity sha512-PlZ8JFRo40i29VyXHv+2QmZ+fjUJNFxCy7mMfOwZEW0TADd7uUjmimVawwjsmPpXRYIEbKiFUnACr0AP4uGagg==
   dependencies:
     debug "4.1.1"
     html-minifier "4.0.0"
