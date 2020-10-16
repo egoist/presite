@@ -1,3 +1,13 @@
+## [2.0.1](https://github.com/egoist/presite/compare/v2.0.0...v2.0.1) (2020-10-16)
+
+
+### Bug Fixes
+
+* **dep:** update taki ([5792437](https://github.com/egoist/presite/commit/57924371db2f1ad25b697b544b2c59a16f85809b))
+* use --manually flag ([6e7a40b](https://github.com/egoist/presite/commit/6e7a40beebdf8bc940f3aca8ac1d99ed59c17402))
+
+
+
 # [2.0.0](https://github.com/egoist/presite/compare/v1.0.0...v2.0.0) (2020-07-31)
 
 
