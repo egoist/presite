@@ -1,5 +1,5 @@
 import { parse as parseUrl } from 'url'
-import { request, cleanup } from './taki'
+import { request, cleanup } from 'taki'
 import chalk from 'chalk'
 import { PromiseQueue } from '@egoist/promise-queue'
 import { Writer } from './Writer'
