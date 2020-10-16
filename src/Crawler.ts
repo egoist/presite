@@ -1,5 +1,5 @@
 import { parse as parseUrl } from 'url'
-import { request, cleanup } from 'taki'
+import { request, cleanup } from './taki'
 import chalk from 'chalk'
 import { PromiseQueue } from '@egoist/promise-queue'
 import { Writer } from './Writer'
@@ -22,6 +22,7 @@ type CrawlerOptions = {
     routes: string[] | (() => Promise<string[]>)
     onBrowserPage?: (page: Page) => void | Promise<void>
     manually?: string | boolean
+    chromePath?: string
   }
   writer: Writer
   logger: Logger
@@ -49,6 +50,7 @@ export class Crawler {
           let links: Set<string> | undefined
           const html = await request({
             url: `http://${hostname}:${port}${route}`,
+            chromePath: options.chromePath,
             onBeforeRequest(url) {
               logger.log(`Crawling contents from ${chalk.cyan(url)}`)
             },

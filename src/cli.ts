@@ -27,6 +27,7 @@ async function main() {
     .option('-r, --routes <routes>', 'Addtional routes to crawl contents from')
     .option('-d, -o, --out-dir <dir>', 'The directory to output files')
     .option('-q, --quiet', 'Output nothing in console')
+    .option('-cp, --chrome-path', 'Chrome path')
     .action(async (dir: string = '.', flags) => {
       const { Server } = await import('./Server')
       const { Crawler } = await import('./Crawler')
@@ -39,6 +40,7 @@ async function main() {
         routes?: string[] | (() => Promise<string[]>)
         onBrowserPage?: (page: Page) => void | Promise<void>
         manually?: boolean | string
+        chromePath?: string
       }
 
       let config: Required<ConfigInput>
@@ -90,6 +92,7 @@ async function main() {
           routes: config.routes,
           onBrowserPage: config.onBrowserPage,
           manually: config.manually,
+          chromePath: config.chromePath
         },
         writer,
         logger,
