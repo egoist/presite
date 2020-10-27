@@ -41,7 +41,7 @@
     "@types/update-notifier": "^4.1.0",
     "shipjs": "0.20.1",
     "tsup": "^3.4.2",
-    "typescript": "^3.9.7"
+    "typescript": "^4.0.5"
   },
   "engines": {
     "node": ">=12"
