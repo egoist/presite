@@ -8,6 +8,7 @@ import serveStatic from 'serve-static'
 import { SPECIAL_EXTENSIONS_RE } from './Crawler'
 
 type ServerOptions = {
+  port: number
   baseDir: string
   outDir: string
 }
@@ -60,7 +61,8 @@ export class Server {
   }
 
   async start(): Promise<void> {
-    const port = await getPort()
+    const optsPort = this.opts.port
+    const port = optsPort !== undefined ? optsPort : await getPort()
     this.port = port
     this.server = new HttpServer(this.app.handler as any)
     this.server.listen(this.port!, this.hostname)

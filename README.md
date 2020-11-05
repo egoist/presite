@@ -198,6 +198,18 @@ module.exports = {
 }
 ```
 
+### Port
+
+If none is specified the server uses a random available port.
+
+Example:
+
+```js
+module.exports = {
+  port: 8080,
+}
+```
+
 ## CLI options
 
 Run `presite --help`.
