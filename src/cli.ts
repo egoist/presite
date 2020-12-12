@@ -27,7 +27,7 @@ async function main() {
     .option('-r, --routes <routes>', 'Addtional routes to crawl contents from')
     .option('-d, -o, --out-dir <dir>', 'The directory to output files')
     .option('-q, --quiet', 'Output nothing in console')
-    .action(async (dir: string = '.', flags) => {
+    .action(async (dir: string | undefined, flags) => {
       const { Server } = await import('./Server')
       const { Crawler } = await import('./Crawler')
       const { Writer } = await import('./Writer')
@@ -59,14 +59,13 @@ async function main() {
       }
       config = Object.assign(
         {
+          baseDir: '.',
           outDir: '.presite',
           routes: ['/'],
         },
         configData,
         flags,
-        {
-          baseDir: dir,
-        }
+        dir && { baseDir: dir }
       )
 
       const logger = new Logger({ verbose: !flags.quiet })
