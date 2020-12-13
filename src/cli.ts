@@ -15,6 +15,7 @@ async function main() {
 
   cli
     .command('[dir]', `Prerender your website`)
+    .option('-p, --port', 'Server port')
     .option(
       '--wait <time_or_selector>',
       'Wait for specific ms or dom element to appear'
@@ -34,6 +35,7 @@ async function main() {
       const { Logger } = await import('./Logger')
 
       type ConfigInput = {
+        port?: number
         baseDir?: string
         outDir?: string
         routes?: string[] | (() => Promise<string[]>)
@@ -71,6 +73,7 @@ async function main() {
       const logger = new Logger({ verbose: !flags.quiet })
 
       const server = new Server({
+        port: config.port,
         baseDir: config.baseDir,
         outDir: config.outDir,
       })
