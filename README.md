@@ -178,6 +178,18 @@ module.exports = {
 }
 ```
 
+### Filter out link to be crawled
+
+To prevent link (from `<a>` elements) to be crawled, you could use a linkFilter:
+
+```js
+module.exports = {
+  linkFilter(url) {
+    return !url.endsWith(".xml")
+  },
+}
+```
+
 ### Source directory
 
 This is the same as using CLI `presite ./path/to/your/spa`:

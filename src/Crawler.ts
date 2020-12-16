@@ -22,6 +22,7 @@ type CrawlerOptions = {
     routes: string[] | (() => Promise<string[]>)
     onBrowserPage?: (page: Page) => void | Promise<void>
     manually?: string | boolean
+    linkFilter?: (url: string) => boolean
   }
   writer: Writer
   logger: Logger
@@ -87,7 +88,11 @@ export class Crawler {
           })
 
           if (links && links.size > 0) {
-            for (const link of links) {
+            const filtered = options.linkFilter
+              ? Array.from(links).filter(options.linkFilter)
+              : links
+
+            for (const link of filtered) {
               queue.add(link)
             }
           }

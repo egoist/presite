@@ -39,6 +39,7 @@ async function main() {
         routes?: string[] | (() => Promise<string[]>)
         onBrowserPage?: (page: Page) => void | Promise<void>
         manually?: boolean | string
+        linkFilter?: (url: string) => boolean
       }
 
       let config: Required<ConfigInput>
@@ -89,6 +90,7 @@ async function main() {
           routes: config.routes,
           onBrowserPage: config.onBrowserPage,
           manually: config.manually,
+          linkFilter: config.linkFilter
         },
         writer,
         logger,
