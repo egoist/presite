@@ -180,12 +180,14 @@ module.exports = {
 
 ### Filter out link to be crawled
 
-To prevent link (from `<a>` elements) to be crawled, you could use a linkFilter:
+To prevent link (from `<a>` elements) to be crawled, you could use the `linkFilter` option:
 
 ```js
 module.exports = {
+  // Returns `true` to keep, `false` otherwise
   linkFilter(url) {
-    return !url.endsWith(".xml")
+    // Ignore URLs ending with .xml
+    return !url.endsWith('.xml')
   },
 }
 ```
