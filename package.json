@@ -11,7 +11,7 @@
     "dist"
   ],
   "scripts": {
-    "test": "echo 'no tests!'",
+    "test": "npm run build",
     "build": "rm -rf dist && tsup src/cli.ts --dts",
     "prepublishOnly": "npm run build",
     "presite": "node -r sucrase/register src/cli.ts",

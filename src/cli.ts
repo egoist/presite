@@ -88,7 +88,7 @@ async function main() {
           routes: config.routes,
           onBrowserPage: config.onBrowserPage,
           manually: config.manually,
-          linkFilter: config.linkFilter
+          linkFilter: config.linkFilter,
           wait: config.wait,
         },
         writer,
