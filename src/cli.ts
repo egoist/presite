@@ -6,6 +6,8 @@ import update from 'update-notifier'
 import JoyCon from 'joycon'
 import { Page } from 'puppeteer-core'
 
+import type { CrawlerOptions } from './Crawler'
+
 const pkg: typeof import('../package.json') = require('../package')
 
 update({ pkg }).notify()
@@ -33,13 +35,9 @@ async function main() {
       const { Writer } = await import('./Writer')
       const { Logger } = await import('./Logger')
 
-      type ConfigInput = {
+      type ConfigInput = CrawlerOptions['options'] & {
         baseDir?: string
         outDir?: string
-        routes?: string[] | (() => Promise<string[]>)
-        onBrowserPage?: (page: Page) => void | Promise<void>
-        manually?: boolean | string
-        linkFilter?: (url: string) => boolean
       }
 
       let config: Required<ConfigInput>
@@ -91,6 +89,7 @@ async function main() {
           onBrowserPage: config.onBrowserPage,
           manually: config.manually,
           linkFilter: config.linkFilter
+          wait: config.wait,
         },
         writer,
         logger,

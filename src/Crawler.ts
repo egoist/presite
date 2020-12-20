@@ -15,7 +15,7 @@ const routeToFile = (route: string) => {
   return route.replace(/\/?$/, '/index.html')
 }
 
-type CrawlerOptions = {
+export type CrawlerOptions = {
   hostname: string
   port: number
   options: {
@@ -23,6 +23,7 @@ type CrawlerOptions = {
     onBrowserPage?: (page: Page) => void | Promise<void>
     manually?: string | boolean
     linkFilter?: (url: string) => boolean
+    wait?: string | number
   }
   writer: Writer
   logger: Logger
@@ -85,6 +86,7 @@ export class Crawler {
                 )
               })
             },
+            wait: options.wait,
           })
 
           if (links && links.size > 0) {
