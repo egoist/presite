@@ -30,7 +30,7 @@
     "polka": "^0.5.2",
     "read-pkg-up": "^7.0.1",
     "serve-static": "^1.14.1",
-    "taki": "2.3.2",
+    "taki": "^2.3.3",
     "update-notifier": "^4.1.0"
   },
   "devDependencies": {
@@ -40,8 +40,8 @@
     "@types/puppeteer-core": "^2.0.0",
     "@types/update-notifier": "^4.1.0",
     "shipjs": "0.20.1",
-    "tsup": "^3.4.2",
-    "typescript": "^3.9.7"
+    "tsup": "^3.12.1",
+    "typescript": "^4.1.4"
   },
   "engines": {
     "node": ">=12"
