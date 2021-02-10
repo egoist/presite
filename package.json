@@ -38,7 +38,7 @@
     "@types/fs-extra": "^9.0.1",
     "@types/polka": "^0.5.1",
     "@types/puppeteer-core": "^2.0.0",
-    "@types/update-notifier": "^4.1.0",
+    "@types/update-notifier": "^5.0.0",
     "shipjs": "0.20.1",
     "tsup": "^3.12.1",
     "typescript": "^4.1.4"
