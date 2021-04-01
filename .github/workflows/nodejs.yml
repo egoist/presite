@@ -1,6 +1,3 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
 name: Node.js CI
 
 on:
@@ -8,31 +5,53 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
+  issue_comment:
+    types: [created]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  test:
+    # skip "ci skip" unless a issue comment explictly asks
+    if: "!contains(github.event.head_commit.message, 'ci skip') || (github.event.issue && startsWith(github.event.issue.comment.body, '/please_release'))"
 
     strategy:
       matrix:
-        node-version: [14.x]
+        os: [ubuntu-latest]
 
+    runs-on: ${{ matrix.os }}
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 14.x
 
-      - name: Install dependencies
-        run: yarn
-
-      - name: Run tests
-        run: yarn test
-
-      - name: Release and publish package
-        run: npx semantic-release
+      - name: Cache ~/.pnpm-store
+        uses: actions/cache@v2
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          cache-name: cache-pnpm-store
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-${{ matrix.node-version }}-build-${{ env.cache-name }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.node-version }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-${{ matrix.node-version }}-build-
+            ${{ runner.os }}-
+      - name: Install pnpm
+        run: npm i -g pnpm
+
+      - name: Install deps
+        run: pnpm i
+
+      # Runs a set of commands using the runners shell
+      - name: Build and Test
+        run: npm run test
+
+      - name: Release
+        run: pnpx semantic-release --branches main
+        if: "contains(github.event.head_commit.message, 'publish release') || github.event.issue"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

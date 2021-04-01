@@ -3,8 +3,7 @@ import { join } from 'path'
 import fs from 'fs-extra'
 import polka from 'polka'
 import getPort from 'get-port'
-import historyAPIFallback from 'connect-history-api-fallback'
-import serveStatic from 'serve-static'
+import serveStatic from 'sirv'
 import { SPECIAL_EXTENSIONS_RE } from './Crawler'
 
 type ServerOptions = {
@@ -24,8 +23,7 @@ export class Server {
     this.hostname = 'localhost'
     this.opts = opts
 
-    this.app.use(historyAPIFallback())
-    this.app.use(serveStatic(this.opts.baseDir))
+    this.app.use(serveStatic(this.opts.baseDir, { single: true }))
     this.app.use(async (req, res, next) => {
       if (!SPECIAL_EXTENSIONS_RE.test(req.path)) {
         return next()
