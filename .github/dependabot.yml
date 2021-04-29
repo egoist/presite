@@ -1,0 +1,35 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "21:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: "@types/fs-extra"
+    versions:
+    - 9.0.6
+    - 9.0.7
+    - 9.0.8
+  - dependency-name: cac
+    versions:
+    - 6.7.1
+  - dependency-name: shipjs
+    versions:
+    - 0.23.0
+  - dependency-name: typescript
+    versions:
+    - 4.1.3
+    - 4.1.4
+  - dependency-name: bl
+    versions:
+    - 4.0.3
+    - 4.0.4
+  - dependency-name: tsup
+    versions:
+    - 3.12.0
+    - 3.12.1
+  - dependency-name: update-notifier
+    versions:
+    - 5.0.1
