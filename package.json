@@ -8,7 +8,7 @@
   },
   "bin": "dist/cli.js",
   "files": [
-    "*"
+    "dist"
   ],
   "scripts": {
     "test": "npm run build",
