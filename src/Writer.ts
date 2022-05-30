@@ -24,6 +24,11 @@ export class Writer {
     from = path.resolve(from)
     const outDir = path.resolve(this.opts.outDir)
     if (from === outDir) return Promise.resolve()
-    return fs.copy(from, outDir)
+    return (
+      /* TODO: JSFIX could not patch the breaking change:
+      Allow copying broken symlinks 
+      Suggested fix: You can use the exists and existsSync functions https://nodejs.org/api/fs.html#fsexistspath-callback from the fs module to check if a symlink is broken. */
+      fs.copy(from, outDir)
+    )
   }
 }

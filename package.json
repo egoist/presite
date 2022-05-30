@@ -22,7 +22,7 @@
     "@egoist/promise-queue": "^1.1.0",
     "cac": "^6.7.2",
     "chalk": "^4.1.0",
-    "fs-extra": "^9.1.0",
+    "fs-extra": "^10.0.0",
     "get-port": "^5.0.0",
     "joycon": "^3.0.1",
     "polka": "^0.5.2",
